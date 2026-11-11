@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b0811">
+  <meta name="description" content="OpenBoost is a small Windows utility that saves the original value of every tweak, previews the exact change, and benchmarks whether it helped.">
+  <title>OpenBoost — Windows tuning, with receipts</title>
+  <link rel="icon" type="image/x-icon" href="icon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..125,400..700&family=Hanken+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script>document.documentElement.classList.add('js')</script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header" id="top">
+    <div class="shell header-row">
+      <a class="brand" href="#top" aria-label="OpenBoost home">
+        <img src="icon.jpg" width="28" height="28" alt="">
+        <span>OpenBoost</span>
+      </a>
+
+      <nav class="site-nav" aria-label="Sections">
+        <a href="#benchmark">Benchmark</a>
+        <a href="#proof">Receipts</a>
+        <a href="#safety">Safety</a>
+        <a href="#library">Library</a>
+        <a href="#download">Download</a>
+      </nav>
+
+      <a class="header-github" href="https://github.com/ExbotsSites/OpenBoost" target="_blank" rel="noopener noreferrer">GitHub</a>
+
+      <details class="mobile-menu">
+        <summary>Menu</summary>
+        <nav aria-label="Sections">
+          <a href="#benchmark">Benchmark</a>
+          <a href="#proof">Receipts</a>
+          <a href="#safety">Safety</a>
+          <a href="#library">Library</a>
+          <a href="#download">Download</a>
+          <a href="https://github.com/ExbotsSites/OpenBoost" target="_blank" rel="noopener noreferrer">GitHub</a>
+        </nav>
+      </details>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="shell hero-grid">
+        <h1 class="hero-title" id="hero-title">
+          <span class="line"><span data-line style="--i:0">Windows tuning,</span></span>
+          <span class="line"><span data-line style="--i:1">with receipts.</span></span>
+        </h1>
+
+        <p class="hero-support" data-load>OpenBoost saves the original value of every tweak, previews the exact change, and benchmarks whether it actually did anything.</p>
+
+        <div class="hero-cta" data-load>
+          <a class="button" href="#download" id="hero-download">Download for Windows</a>
+          <span class="hero-note">Free and open source; it runs locally.</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--surface" id="benchmark" aria-labelledby="benchmark-title">
+      <div class="shell">
+        <div class="section-head">
+          <h2 id="benchmark-title">Most tweaks are noise.</h2>
+          <p class="lead">The benchmark runs before and after a batch, three times, and reports the median. On this machine, one metric improved. Three did not. The app says so.</p>
+        </div>
+
+        <div class="compare" data-compare>
+          <div class="compare-words" aria-hidden="true">
+            <span class="compare-word" data-side="before">Before</span>
+            <span class="compare-word" data-side="after">After</span>
+          </div>
+
+          <div class="compare-control">
+            <label class="visually-hidden" for="compare-range">Compare the benchmark before and after the tweaks</label>
+            <input id="compare-range" type="range" min="0" max="100" value="0" step="1">
+            <div class="compare-scale" aria-hidden="true"><span>Before</span><span>After</span></div>
+          </div>
+
+          <div class="metrics" data-stagger>
+            <div class="metric" data-before="690" data-after="687" data-good="up" data-decimals="0" data-max="750" data-reveal="rise">
+              <span class="metric-name">CPU score <small class="metric-values">690 → 687</small></span>
+              <span class="metric-track" aria-hidden="true"><i></i></span>
+              <span class="metric-read"><b data-now>690</b><span class="metric-unit">pts</span></span>
+              <span class="metric-delta" data-delta>Baseline</span>
+            </div>
+            <div class="metric" data-before="9.3" data-after="9.6" data-good="up" data-decimals="1" data-max="12" data-reveal="rise">
+              <span class="metric-name">Memory copy <small class="metric-values">9.3 → 9.6</small></span>
+              <span class="metric-track" aria-hidden="true"><i></i></span>
+              <span class="metric-read"><b data-now>9.3</b><span class="metric-unit">GB/s</span></span>
+              <span class="metric-delta" data-delta>Baseline</span>
+            </div>
+            <div class="metric" data-before="11.75" data-after="12.51" data-good="down" data-decimals="1" data-max="20" data-reveal="rise">
+              <span class="metric-name">Timer delay <small class="metric-values">11.75 → 12.51</small></span>
+              <span class="metric-track" aria-hidden="true"><i></i></span>
+              <span class="metric-read"><b data-now>11.75</b><span class="metric-unit">ms</span></span>
+              <span class="metric-delta" data-delta>Baseline</span>
+            </div>
+            <div class="metric" data-before="16.40" data-after="16.65" data-good="down" data-decimals="2" data-max="20" data-reveal="rise">
+              <span class="metric-name">Worst 1% <small class="metric-values">16.40 → 16.65</small></span>
+              <span class="metric-track" aria-hidden="true"><i></i></span>
+              <span class="metric-read"><b data-now>16.40</b><span class="metric-unit">ms</span></span>
+              <span class="metric-delta" data-delta>Baseline</span>
+            </div>
+          </div>
+
+          <p class="compare-note">One measured run on this machine. A different CPU, GPU or background app will move the numbers. The point is the comparison, not the score.</p>
+        </div>
+
+        <figure class="shot shot--bench" data-reveal="clip">
+          <img src="screenshots/bench.png" width="1200" height="800" alt="OpenBoost benchmark page showing before and after CPU, memory, timer and worst-frame results.">
+          <figcaption>The real Benchmark page, after a batch. It also checks RAM speed, refresh rate, startup apps and background processes.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section" id="proof" aria-labelledby="proof-title">
+      <div class="shell">
+        <div class="section-head">
+          <h2 id="proof-title">The receipts.</h2>
+          <p class="lead">Fifty-five tweaks, each with a risk level, an expected impact and a Microsoft source. Three verdicts keep the list honest.</p>
+        </div>
+
+        <table class="proof-table">
+          <thead>
+            <tr><th scope="col">Verdict</th><th scope="col">Examples</th><th scope="col">What it means</th></tr>
+          </thead>
+          <tbody data-stagger>
+            <tr data-reveal="rise">
+              <th scope="row">Measured</th>
+              <td>Startup delay, menu delay, mouse acceleration</td>
+              <td>A clear, repeatable effect. Still benchmark it on your machine.</td>
+            </tr>
+            <tr data-reveal="rise">
+              <th scope="row">Varies</th>
+              <td>Game Mode, hardware GPU scheduling, fullscreen optimizations</td>
+              <td>Helpful on some machines and harmful on others. Test, then keep or undo.</td>
+            </tr>
+            <tr data-reveal="rise">
+              <th scope="row">Often placebo</th>
+              <td>QoS cap, network throttling, global timer resolution</td>
+              <td>Usually too small to feel. They stay because people ask for them.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p class="proof-note">OpenBoost also warns when a tweak can interfere with kernel anti-cheat, and tells you when a saved value was changed outside the app. <a class="link" href="https://github.com/ExbotsSites/OpenBoost/blob/main/tweaks.js" target="_blank" rel="noopener noreferrer">Read the tweak definitions</a>.</p>
+
+        <figure class="shot shot--proof" data-reveal="clip">
+          <img src="screenshots/tweaks.png" width="1200" height="800" alt="OpenBoost Performance page showing impact tags and Source links beside each tweak.">
+          <figcaption>Every row says what it changes, how much it usually matters, and where Windows documents it.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section section--safety" id="safety" aria-labelledby="safety-title">
+      <div class="shell">
+        <div class="section-head">
+          <h2 id="safety-title">Nothing is one-way.</h2>
+          <p class="lead">Before a tweak is applied, OpenBoost writes down the current registry value, service start type or power plan. Undo puts that exact value back.</p>
+        </div>
+
+        <div class="safety-grid">
+          <div class="bands" data-stagger>
+            <article class="band" data-reveal="left">
+              <div><h3>Every change keeps its original.</h3><p>Registry values, service start types and the active power plan are saved before the first write.</p></div>
+              <span class="band-state">Saved first</span>
+            </article>
+            <article class="band" data-reveal="left">
+              <div><h3>Preview the exact diff.</h3><p>See every before → after line before anything is written. Cancel if a line looks wrong.</p></div>
+              <span class="band-state">Preview</span>
+            </article>
+            <article class="band" data-reveal="left">
+              <div><h3>Notice a change made elsewhere.</h3><p>If a saved value no longer matches, Undo asks whether to keep the outside change or restore yours.</p></div>
+              <span class="band-state">Drift check</span>
+            </article>
+            <article class="band" data-reveal="left">
+              <div><h3>Say what cannot be undone.</h3><p>App removal is the one action without a saved original. The app says so before it runs.</p></div>
+              <span class="band-state">Known limit</span>
+            </article>
+          </div>
+
+          <div class="safety-side">
+            <div class="diff" data-ui aria-label="Example of a preview comparison">
+              <div class="diff-head"><span>Preview changes</span><span>2 values</span></div>
+              <div class="diff-body">
+                <div class="diff-row"><code>GameBar\AutoGameModeEnabled</code><span><del>1</del> <ins>1</ins></span></div>
+                <div class="diff-row"><code>GameBar\AllowAutoGameMode</code><span><del>0</del> <ins>1</ins></span></div>
+              </div>
+              <div class="diff-foot"><span>Original values saved</span><span class="diff-status">Ready</span></div>
+            </div>
+
+            <figure class="shot shot--safety" data-reveal="clip">
+              <img src="screenshots/home.png" width="1200" height="800" alt="OpenBoost Home page showing CPU and memory use, running processes and findings.">
+              <figcaption>The scan on this machine. No invented dashboard, no stock hardware photo.</figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--library" id="library" aria-labelledby="library-title">
+      <div class="shell">
+        <div class="section-head">
+          <h2 id="library-title">Your library, not a launcher.</h2>
+          <p class="lead">OpenBoost reads Steam, Epic and GOG manifests directly. It shows what is installed, how large it is, when you last played, and whether an update is waiting.</p>
+        </div>
+
+        <div class="library-grid">
+          <figure class="shot shot--library" data-reveal="clip">
+            <img src="screenshots/library.png" width="1200" height="800" alt="OpenBoost game library showing Steam, Epic and GOG covers, install sizes, favorites and Session buttons.">
+            <figcaption>Nine installed games found here. Covers are cached locally, so the grid still works offline.</figcaption>
+          </figure>
+
+          <div class="library-facts" data-reveal="rise">
+            <p class="facts-lead">Run a game, apply a reversible per-game optimization, or start a Session that restores the tweaks when the game closes.</p>
+            <ul class="facts">
+              <li><strong>Run without opening the launcher.</strong><span>Steam, Epic and GOG games launch from the library.</span></li>
+              <li><strong>Know what is installed.</strong><span>Size, last played, update state and free space on the drive.</span></li>
+              <li><strong>Keep the games you play.</strong><span>Favorites, search, and filters for launcher and updates.</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="download" id="download" aria-labelledby="download-title">
+      <div class="shell download-grid">
+        <div class="download-main">
+          <h2 id="download-title">Take the receipts with you.</h2>
+          <p class="download-lead">The installer adds shortcuts. The portable build runs from any folder. Both are unsigned; check the SHA-256 on the release page.</p>
+
+          <div class="download-actions">
+            <a class="button button--accent" id="dl-setup" data-download href="https://github.com/ExbotsSites/OpenBoost/releases/latest"><span id="setup-label">Download installer</span></a>
+            <a class="button button--ink" id="dl-portable" data-download href="https://github.com/ExbotsSites/OpenBoost/releases/latest"><span id="portable-label">Download portable</span></a>
+          </div>
+
+          <p class="download-meta"><span data-version>Latest</span> · Windows 10 or 11 · 64-bit · MIT</p>
+          <p class="download-note" id="release-note">Downloads open the latest GitHub release; everything stays on this PC.</p>
+        </div>
+
+        <dl class="download-facts" aria-label="Build details">
+          <div><dt>Installer</dt><dd>Adds Start-menu and desktop shortcuts, plus an uninstall entry.</dd></div>
+          <div><dt>Portable</dt><dd>One executable, run from any folder, with nothing left behind.</dd></div>
+          <div><dt>Requirements</dt><dd>Windows 10 or 11, 64-bit. Nothing leaves the machine.</dd></div>
+          <div><dt>Build verification</dt><dd>Unsigned by a small open-source project. The source and SHA-256 are public.</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="section" id="questions" aria-labelledby="questions-title">
+      <div class="shell">
+        <div class="faq-head">
+          <h2 id="questions-title">Before you install.</h2>
+          <p class="lead">Straight answers to the things people ask before running a tweaking tool.</p>
+        </div>
+
+        <div class="faq-text" data-stagger>
+          <p data-reveal="rise"><strong>Is it safe?</strong> Every reversible tweak saves its original value first. Preview shows the exact change, and Settings restores everything OpenBoost backed up.</p>
+          <p data-reveal="rise"><strong>Will it raise my FPS?</strong> Sometimes. Game Mode and GPU scheduling vary by machine. The benchmark exists so you can see when they do not.</p>
+          <p data-reveal="rise"><strong>Does it need administrator rights?</strong> Some tweaks write to HKLM or change services. The app marks those and offers a restart as administrator.</p>
+          <p data-reveal="rise"><strong>Why is the build unsigned?</strong> Code signing costs money and this is a small open-source project. The source and SHA-256 are public; verify them before running.</p>
+          <p data-reveal="rise"><strong>What cannot be undone?</strong> Removing preinstalled apps. Everything else keeps a saved original; a few changes need a sign-out or restart.</p>
+          <p data-reveal="rise"><strong>Does it collect anything?</strong> It collects nothing. The diagnostics export is manual and redacts your account name.</p>
+          <p data-reveal="rise"><strong>Which Windows versions?</strong> Windows 10 and 11, 64-bit. A tweak that needs a newer build is disabled instead of applied blindly.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--source" id="source" aria-labelledby="source-title">
+      <div class="shell source-grid">
+        <div data-reveal="rise">
+          <h2 id="source-title">Run from source.</h2>
+          <p class="lead">Node 20 or newer and Electron. Clone it, install, start. The tweak definitions are plain objects, so you can read every change before it runs.</p>
+          <a class="link" href="https://github.com/ExbotsSites/OpenBoost" target="_blank" rel="noopener noreferrer">Open the repository</a>
+        </div>
+
+        <div class="code" data-reveal="clip">
+          <div class="code-head">
+            <span>Terminal</span>
+            <button class="copy" id="copy-code" type="button">Copy</button>
+          </div>
+          <pre><code id="code-block">git clone https://github.com/ExbotsSites/OpenBoost.git
+cd OpenBoost
+npm install
+npm start</code></pre>
+          <p class="copy-status" id="copy-status" aria-live="polite"></p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="shell">
+      <div class="footer-top">
+        <p class="footer-note">Windows 10 and 11 · 64-bit</p>
+        <div class="footer-links">
+          <a href="https://github.com/ExbotsSites/OpenBoost" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a href="https://github.com/ExbotsSites/OpenBoost/releases" target="_blank" rel="noopener noreferrer">Releases</a>
+          <a href="#source">Source</a>
+        </div>
+      </div>
+      <p class="footer-wordmark">OpenBoost</p>
+      <p class="footer-meta">MIT licensed. Built to run offline.</p>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
