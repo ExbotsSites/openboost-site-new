@@ -234,6 +234,10 @@ h1 span {
   line-height: 1.5;
 }
 
+.game-note {
+  margin-top: 6px;
+}
+
 .custom-server {
   max-width: 430px;
   margin-top: 14px;

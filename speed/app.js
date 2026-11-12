@@ -5,20 +5,61 @@
   const UP = 'https://speed.cloudflare.com/__up';
   const TEST_SECONDS = 6;
   const DOWN_CHUNK = 20 * 1024 * 1024;
-  const UP_CHUNK = 6 * 1024 * 1024;
+  // 4 MiB stays below the upload limit used by several public LibreSpeed hosts.
+  const UP_CHUNK = 4 * 1024 * 1024;
   const GAUGE_MAX = 1000;
-  const SERVER_NOTE = 'Iliad and TIM use Ookla endpoints that block browser tests. Add a LibreSpeed-compatible URL to test another network.';
+  const SERVER_NOTE = 'Auto pings every server. Iliad/TIM use Ookla endpoints that block browser tests. Game ping is separate — see below.';
 
   const servers = [
     { id: 'auto', label: 'Automatic — lowest latency', kind: 'auto' },
-    { id: 'cloudflare', label: 'Cloudflare — nearest edge', kind: 'cloudflare', provider: 'Cloudflare', city: 'Nearest edge' },
+    { id: 'cloudflare', label: 'Cloudflare — global nearest edge', kind: 'cloudflare', provider: 'Cloudflare', city: 'Global edge' },
     {
       id: 'garr-roma',
-      label: 'Roma — GARR',
+      label: 'Roma, Italy — GARR',
       kind: 'librespeed',
       provider: 'GARR',
       city: 'Roma',
       base: 'https://st-be-rm2.infra.garr.it'
+    },
+    {
+      id: 'clouvider-ams',
+      label: 'Amsterdam, Netherlands — Clouvider',
+      kind: 'librespeed',
+      provider: 'Clouvider',
+      city: 'Amsterdam',
+      base: 'https://ams.speedtest.clouvider.net/backend'
+    },
+    {
+      id: 'clouvider-fra',
+      label: 'Frankfurt, Germany — Clouvider',
+      kind: 'librespeed',
+      provider: 'Clouvider',
+      city: 'Frankfurt',
+      base: 'https://fra.speedtest.clouvider.net/backend'
+    },
+    {
+      id: 'clouvider-nyc',
+      label: 'New York, USA — Clouvider',
+      kind: 'librespeed',
+      provider: 'Clouvider',
+      city: 'New York',
+      base: 'https://nyc.speedtest.clouvider.net/backend'
+    },
+    {
+      id: 'sharktech-chi',
+      label: 'Chicago, USA — Sharktech',
+      kind: 'librespeed',
+      provider: 'Sharktech',
+      city: 'Chicago',
+      base: 'https://chispeed.sharktech.net/backend'
+    },
+    {
+      id: 'clouvider-lax',
+      label: 'Los Angeles, USA — Clouvider',
+      kind: 'librespeed',
+      provider: 'Clouvider',
+      city: 'Los Angeles',
+      base: 'https://la.speedtest.clouvider.net/backend'
     }
   ];
 
@@ -62,6 +103,18 @@
     if (server.kind === 'auto') return 'Auto server';
     if (server.kind === 'cloudflare') return 'Cloudflare edge';
     return `${server.city} · ${server.provider}`;
+  }
+
+  function populateServerOptions() {
+    const fragment = document.createDocumentFragment();
+    for (const server of servers) {
+      const option = document.createElement('option');
+      option.value = server.id;
+      option.textContent = server.label;
+      fragment.append(option);
+    }
+    el.serverSelect.replaceChildren(fragment);
+    el.serverSelect.value = 'auto';
   }
 
   function setStatus(text, state) {
@@ -142,20 +195,19 @@
     if (el.serverSelect.value !== 'auto') return getServer(el.serverSelect.value);
 
     const candidates = servers.filter(server => server.kind !== 'auto');
-    let best = null;
-
-    for (const server of candidates) {
+    const results = await Promise.all(candidates.map(async server => {
       try {
-        const ping = await quickPing(server);
-        if (!best || ping < best.ping) best = { server, ping };
+        return { server, ping: await quickPing(server) };
       } catch {
-        // Try the next public server; a dead host should not block the test.
+        // A dead public server should not block the rest of the list.
+        return null;
       }
-    }
+    }));
+    const reachable = results.filter(Boolean).sort((a, b) => a.ping - b.ping);
 
-    if (!best) throw new Error('No speed test server is reachable.');
-    el.serverSelect.value = best.server.id;
-    return best.server;
+    if (!reachable.length) throw new Error('No speed test server is reachable.');
+    el.serverSelect.value = reachable[0].server.id;
+    return reachable[0].server;
   }
 
   async function measureLatency(server) {
@@ -437,6 +489,9 @@
     el.hint.textContent = 'About 15 seconds';
     resetReadout();
   }
+
+  populateServerOptions();
+  resetReadout();
 
   el.start.addEventListener('click', runTest);
   el.customForm.addEventListener('submit', addCustomServer);

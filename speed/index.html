@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#f2efe7">
-  <meta name="description" content="A clean, ad-free internet speed test with public server selection for download, upload, ping and jitter.">
+  <meta name="description" content="A clean, ad-free internet speed test with public servers in Europe and North America for download, upload, ping and jitter.">
   <title>Speed test — Axyy</title>
   <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
   <link rel="stylesheet" href="styles.css">
@@ -22,16 +22,17 @@
     <main class="layout">
       <section class="intro" aria-labelledby="title">
         <h1 id="title"><span>Know your</span><span>line.</span></h1>
-        <p class="lede">A clean speed test with no account, no ads and no mystery. One run checks latency, download and upload against the server you choose.</p>
+        <p class="lede">A clean speed test with no account, no ads and no mystery. One run checks latency, download and upload against a nearby or chosen public server.</p>
 
         <div class="server-row">
-          <label for="server">Test server</label>
-          <select id="server" aria-describedby="server-note">
+          <label for="server">Speed-test server</label>
+          <select id="server" aria-describedby="server-note game-note">
             <option value="auto">Automatic — lowest latency</option>
-            <option value="cloudflare">Cloudflare — nearest edge</option>
-            <option value="garr-roma">Roma — GARR</option>
+            <option value="cloudflare">Cloudflare — global nearest edge</option>
+            <option value="garr-roma">Roma, Italy — GARR</option>
           </select>
-          <p class="server-note" id="server-note">Iliad and TIM use Ookla endpoints that block browser tests. Add a LibreSpeed-compatible URL to test another network.</p>
+          <p class="server-note" id="server-note">Auto pings every server. Iliad/TIM use Ookla endpoints that block browser tests.</p>
+          <p class="server-note game-note" id="game-note">Game ping is separate: Fortnite and Valve use UDP game servers, so a web page cannot measure in-game ping. Use the game's region picker or in-game display.</p>
         </div>
 
         <details class="custom-server">
@@ -50,7 +51,7 @@
           <button class="start" id="start" type="button">Start test</button>
           <span class="hint" id="hint">About 15 seconds</span>
         </div>
-        <p class="note" id="note">Results depend on your device, Wi-Fi and distance from the edge. A wired connection is the honest one. The test uses data, more on faster lines.</p>
+        <p class="note" id="note">Results depend on your device, Wi-Fi and distance from the test server. A wired connection is the honest one. The test uses data, more on faster lines.</p>
       </section>
 
       <section class="panel" aria-label="Speed test results">
