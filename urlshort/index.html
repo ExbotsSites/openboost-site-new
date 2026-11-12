@@ -11,7 +11,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css?v=2">
-  <script src="app.js?v=2" defer></script>
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+  <script src="app.js?v=3" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to short links</a>
@@ -56,6 +57,8 @@
               <small class="field-note">The short code is generated for you. Custom codes are not available.</small>
             </label>
 
+            <div class="cf-turnstile" data-sitekey="0x4AAAAAAF-z861Em_741xSV" data-theme="light"></div>
+
             <button class="submit-button" id="submit-button" type="submit"><span id="submit-label">Create short link</span> <span aria-hidden="true">↗</span></button>
             <p class="form-status" id="form-status" role="status" aria-live="polite">Ready when you are.</p>
           </form>
@@ -88,7 +91,7 @@
 
       <section class="trust-row" aria-label="How it works">
         <p><strong>Random only.</strong> Each link gets an eight-character hex code, so there are no custom words to reserve or moderate.</p>
-        <p><strong>Public by design.</strong> The form is open to everyone. Destinations must be valid http or https URLs.</p>
+        <p><strong>Public by design.</strong> The form is open to everyone. Destinations must be valid http or https URLs. Links to sites flagged as unsafe are blocked.</p>
       </section>
     </main>
   </div>
