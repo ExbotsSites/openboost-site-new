@@ -36,6 +36,21 @@
     submitLabel.textContent = loading ? 'Creating…' : 'Create short link';
   }
 
+  function getTurnstileToken() {
+    const field = form.querySelector('[name="cf-turnstile-response"]');
+    return field ? field.value : '';
+  }
+
+  function resetTurnstile() {
+    if (window.turnstile) {
+      try {
+        window.turnstile.reset();
+      } catch {
+        // ignore
+      }
+    }
+  }
+
   function showResult(data) {
     const link = data.shortUrl || `${window.location.origin}/s/${data.slug}`;
     resultEmpty.hidden = true;
@@ -74,6 +89,12 @@
       return;
     }
 
+    const turnstileToken = getTurnstileToken();
+    if (!turnstileToken) {
+      setStatus('Complete the captcha first.', 'error');
+      return;
+    }
+
     setLoading(true);
     setStatus('Creating your short link…');
 
@@ -81,7 +102,7 @@
       const response = await fetch(API_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ url })
+        body: JSON.stringify({ url, turnstileToken })
       });
 
       let data = {};
@@ -95,6 +116,9 @@
         if (response.status === 503) {
           throw new Error('The shortener is not configured on the server yet.');
         }
+        if (response.status === 429) {
+          throw new Error('Too many links created. Try again in a minute.');
+        }
         throw new Error(data.error || 'Could not create the short link.');
       }
 
@@ -104,6 +128,7 @@
       setStatus(error instanceof Error ? error.message : 'Could not create the short link.', 'error');
     } finally {
       setLoading(false);
+      resetTurnstile();
     }
   });
 
