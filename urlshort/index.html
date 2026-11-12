@@ -4,14 +4,14 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#f5efe4">
-  <meta name="description" content="Create clean /s/ short links on your own domain. Pick a random code or write your own.">
+  <meta name="description" content="Create a clean random short link on this domain. Paste a URL and share the short version.">
   <title>Short links — Axyy</title>
   <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=1">
-  <script src="app.js?v=1" defer></script>
+  <link rel="stylesheet" href="styles.css?v=2">
+  <script src="app.js?v=2" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to short links</a>
@@ -33,11 +33,11 @@
     <main id="main">
       <section class="hero" aria-labelledby="page-title">
         <div class="hero-main">
-          <p class="eyebrow">Utility · short links</p>
+          <p class="eyebrow">Utility · public short links</p>
           <h1 id="page-title">Long links,<br><em>short paths.</em></h1>
         </div>
         <div class="hero-aside">
-          <p>Create clean links on this domain. Pick an eight-character code or write your own, then share the short version anywhere.</p>
+          <p>Paste a URL and get a clean link on this domain. Every link gets a random eight-character code.</p>
           <p class="route-line"><span class="route-chip">/s/your-code</span></p>
         </div>
       </section>
@@ -53,37 +53,7 @@
             <label class="field" for="destination">
               <span class="field-label">Destination URL</span>
               <input id="destination" name="destination" type="url" inputmode="url" autocomplete="url" spellcheck="false" placeholder="https://example.com/a/long/path" required>
-            </label>
-
-            <fieldset class="code-fieldset">
-              <legend class="field-label">Short code</legend>
-              <div class="mode-grid">
-                <label class="mode-option is-selected">
-                  <input type="radio" name="mode" value="random" checked>
-                  <span class="mode-copy"><strong>Random</strong><small>Eight characters, generated for you</small></span>
-                </label>
-                <label class="mode-option">
-                  <input type="radio" name="mode" value="custom">
-                  <span class="mode-copy"><strong>Custom</strong><small>Choose a word or short phrase</small></span>
-                </label>
-              </div>
-            </fieldset>
-
-            <div class="custom-wrap" id="custom-wrap" hidden>
-              <label class="field" for="slug">
-                <span class="field-label">Custom code</span>
-                <span class="prefix-input">
-                  <span class="prefix">/s/</span>
-                  <input id="slug" name="slug" type="text" inputmode="url" autocomplete="off" autocapitalize="none" spellcheck="false" maxlength="32" placeholder="openboost">
-                </span>
-                <small class="field-note">2–32 characters. Use letters, numbers and hyphens; no spaces.</small>
-              </label>
-            </div>
-
-            <label class="field admin-field" for="admin-key">
-              <span class="admin-label"><span class="field-label">Admin key</span><span class="admin-badge">Private</span></span>
-              <input id="admin-key" name="admin-key" type="password" autocomplete="current-password" placeholder="Your admin key" required>
-              <small class="field-note">This is sent only to this site's API. It stays in this tab's session storage.</small>
+              <small class="field-note">The short code is generated for you. Custom codes are not available.</small>
             </label>
 
             <button class="submit-button" id="submit-button" type="submit"><span id="submit-label">Create short link</span> <span aria-hidden="true">↗</span></button>
@@ -112,13 +82,13 @@
             </div>
           </div>
 
-          <p class="result-footnote">Links live on this domain. The page stores the admin key in session storage, never in the URL or a cookie.</p>
+          <p class="result-footnote">No account or key needed. Anyone can create a random link on this page.</p>
         </aside>
       </section>
 
       <section class="trust-row" aria-label="How it works">
-        <p><strong>Admin only.</strong> Creating a link requires the private key set in Vercel. Visitors can follow links but cannot create them.</p>
-        <p><strong>Short by design.</strong> Random codes use eight hex characters. Custom codes are case-insensitive and checked for collisions.</p>
+        <p><strong>Random only.</strong> Each link gets an eight-character hex code, so there are no custom words to reserve or moderate.</p>
+        <p><strong>Public by design.</strong> The form is open to everyone. Destinations must be valid http or https URLs.</p>
       </section>
     </main>
   </div>
@@ -127,7 +97,7 @@
     <div class="footer-inner">
       <p class="footer-mark">Axyy</p>
       <div class="footer-side">
-        <p>Long links, short paths. Built on this domain with its own tiny link store.</p>
+        <p>Long links, short paths. A tiny public shortener for this domain.</p>
         <nav class="footer-nav" aria-label="Elsewhere">
           <a href="../tools/">Tools</a>
           <a href="../net/">Net</a>

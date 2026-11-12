@@ -1,9 +1,7 @@
 'use strict';
 
 const {
-  adminStatus,
   getOrigin,
-  normalizeSlug,
   randomSlug,
   redisCommand,
   redisConfigured,
@@ -34,13 +32,6 @@ module.exports = async function handler(req, res) {
     return sendJson(res, 405, { error: 'Method not allowed.' });
   }
 
-  const admin = adminStatus(req);
-  if (!admin.configured) {
-    return sendJson(res, 503, { error: 'SHORTENER_ADMIN_TOKEN is not configured on the server.' });
-  }
-  if (!admin.authorized) {
-    return sendJson(res, 401, { error: 'Invalid admin key.' });
-  }
   if (!redisConfigured()) {
     return sendJson(res, 503, { error: 'Redis is not configured. Add the Upstash environment variables in Vercel.' });
   }
@@ -55,19 +46,6 @@ module.exports = async function handler(req, res) {
     return sendJson(res, 400, { error: error.message });
   }
 
-  const mode = body.mode;
-  if (mode !== 'random' && mode !== 'custom') {
-    return sendJson(res, 400, { error: 'Mode must be random or custom.' });
-  }
-
-  let slug = null;
-  if (mode === 'custom') {
-    slug = normalizeSlug(body.slug);
-    if (!slug) {
-      return sendJson(res, 400, { error: 'That custom code is not valid.' });
-    }
-  }
-
   const origin = getOrigin(req);
   if (!origin) return sendJson(res, 500, { error: 'Could not determine the site origin.' });
 
@@ -78,19 +56,15 @@ module.exports = async function handler(req, res) {
 
   try {
     for (let attempt = 0; attempt < MAX_RANDOM_ATTEMPTS; attempt += 1) {
-      if (mode === 'random') slug = randomSlug();
-
+      const slug = randomSlug();
       const result = await redisCommand(['SET', `shortlink:${slug}`, value, 'NX']);
+
       if (result === 'OK') {
         return sendJson(res, 201, {
           slug,
           url: destination,
           shortUrl: `${origin}/s/${slug}`
         });
-      }
-
-      if (mode === 'custom') {
-        return sendJson(res, 409, { error: 'That custom code is already taken.' });
       }
     }
 
