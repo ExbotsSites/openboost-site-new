@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f2efe7">
+  <meta name="description" content="A clean, ad-free internet speed test with public server selection for download, upload, ping and jitter.">
+  <title>Speed test — Axyy</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <div class="site" id="site" data-state="idle">
+    <header class="masthead">
+      <a class="brand" href="../" aria-label="Axyy home">
+        <span class="brand-name">Axyy</span><span class="brand-slash">/</span><span class="brand-page">speed test</span>
+      </a>
+      <p class="connection" aria-live="polite"><span class="dot" aria-hidden="true"></span><span id="status">Ready</span></p>
+    </header>
+
+    <main class="layout">
+      <section class="intro" aria-labelledby="title">
+        <h1 id="title"><span>Know your</span><span>line.</span></h1>
+        <p class="lede">A clean speed test with no account, no ads and no mystery. One run checks latency, download and upload against the server you choose.</p>
+
+        <div class="server-row">
+          <label for="server">Test server</label>
+          <select id="server" aria-describedby="server-note">
+            <option value="auto">Automatic — lowest latency</option>
+            <option value="cloudflare">Cloudflare — nearest edge</option>
+            <option value="garr-roma">Roma — GARR</option>
+          </select>
+          <p class="server-note" id="server-note">Iliad and TIM use Ookla endpoints that block browser tests. Add a LibreSpeed-compatible URL to test another network.</p>
+        </div>
+
+        <details class="custom-server">
+          <summary>Add a custom server</summary>
+          <form id="custom-form" class="custom-form">
+            <label for="custom-name">Name</label>
+            <input id="custom-name" name="custom-name" type="text" maxlength="40" placeholder="Iliad Milano">
+            <label for="custom-url">LibreSpeed base URL</label>
+            <input id="custom-url" name="custom-url" type="url" inputmode="url" required placeholder="https://speedtest.example.com/backend">
+            <button type="submit">Add server</button>
+          </form>
+          <p class="custom-note">The URL must expose LibreSpeed <code>garbage.php</code> and <code>empty.php</code> with CORS enabled.</p>
+        </details>
+
+        <div class="action-row">
+          <button class="start" id="start" type="button">Start test</button>
+          <span class="hint" id="hint">About 15 seconds</span>
+        </div>
+        <p class="note" id="note">Results depend on your device, Wi-Fi and distance from the edge. A wired connection is the honest one. The test uses data, more on faster lines.</p>
+      </section>
+
+      <section class="panel" aria-label="Speed test results">
+        <div class="panel-top">
+          <div>
+            <p class="metric-label" id="metric-label">Download</p>
+            <div class="reading">
+              <span class="value" id="value">0.0</span>
+              <span class="unit" id="unit">Mbps</span>
+            </div>
+          </div>
+          <p class="phase" id="phase" aria-live="polite">Ready when you are</p>
+        </div>
+
+        <div class="gauge-wrap">
+          <div class="gauge" id="gauge" role="progressbar" aria-label="Current test speed" aria-valuemin="0" aria-valuemax="1000" aria-valuenow="0">
+            <div class="gauge-fill" id="fill"></div>
+          </div>
+          <div class="ticks" aria-hidden="true">
+            <span>0</span><span>250</span><span>500</span><span>1000 Mbps</span>
+          </div>
+        </div>
+
+        <dl class="stats">
+          <div><dt>Download</dt><dd id="download">—</dd></div>
+          <div><dt>Upload</dt><dd id="upload">—</dd></div>
+          <div><dt>Ping</dt><dd id="ping">—</dd></div>
+          <div><dt>Jitter</dt><dd id="jitter">—</dd></div>
+        </dl>
+
+        <div class="panel-foot">
+          <p id="server-label">Auto server</p>
+          <p id="message">No data is stored by this page.</p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>A small utility by <a href="../">Axyy</a>. Test traffic goes to the selected public speed-test server; faster lines use more data.</p>
+      <p>No account. No ads.</p>
+    </footer>
+  </div>
+
+  <noscript>
+    <p class="no-js">This speed test needs JavaScript enabled.</p>
+  </noscript>
+</body>
+</html>
