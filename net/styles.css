@@ -1,0 +1,283 @@
+.net-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+  align-items: start;
+  gap: clamp(20px, 3vw, 36px);
+  margin-top: clamp(52px, 8vh, 84px);
+}
+
+.identity,
+.dns {
+  min-width: 0;
+  padding: clamp(24px, 3.6vw, 44px);
+}
+
+.identity {
+  background: var(--dark);
+  color: var(--dark-ink);
+}
+
+.dns {
+  background: var(--paper-deep);
+}
+
+.card-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.card-head h2 {
+  margin: 0;
+  font-family: var(--display);
+  font-size: clamp(28px, 3.3vw, 38px);
+  font-weight: 600;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+}
+
+.card-meta {
+  padding-top: 4px;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.4;
+  text-align: right;
+}
+
+.identity-status {
+  min-height: 20px;
+  margin: 12px 0 0;
+  color: var(--dark-muted);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.identity-status[data-tone="error"] {
+  color: var(--accent);
+}
+
+.ip-line {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 16px 22px;
+  margin: clamp(20px, 4vw, 34px) 0;
+}
+
+.ip {
+  min-height: 0.8em;
+  margin: 0;
+  color: var(--dark-ink);
+  font-family: var(--display);
+  font-size: clamp(30px, 3.4vw, 44px);
+  font-weight: 600;
+  line-height: 0.92;
+  letter-spacing: -0.045em;
+  overflow-wrap: anywhere;
+}
+
+.ip--long {
+  font-size: clamp(24px, 2.4vw, 32px);
+  line-height: 1.12;
+  letter-spacing: -0.035em;
+}
+
+.identity .button--quiet {
+  background: var(--dark-ink);
+  color: var(--dark);
+}
+
+.identity .button--quiet:hover {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+.identity-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+}
+
+.identity-list div {
+  min-width: 0;
+  padding: 13px 14px;
+  background: var(--dark-soft);
+}
+
+.identity-list dt {
+  margin: 0 0 5px;
+  color: var(--dark-muted);
+  font-size: 11px;
+  line-height: 1.3;
+}
+
+.identity-list dd {
+  margin: 0;
+  color: var(--dark-ink);
+  font-size: 14px;
+  font-weight: 550;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
+.card-note {
+  margin: 22px 0 0;
+  color: var(--dark-muted);
+  font-size: 11px;
+  line-height: 1.55;
+}
+
+.dns .card-note {
+  color: var(--muted);
+}
+
+.dns-form {
+  display: grid;
+  gap: 18px;
+  margin-top: 30px;
+}
+
+.query-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 12px;
+}
+
+.query-row .field--compact {
+  width: min(100%, 160px);
+}
+
+.examples {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px 16px;
+  margin-top: 20px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.dns .status {
+  margin-top: 22px;
+  margin-bottom: 10px;
+}
+
+.dns-results {
+  display: grid;
+  gap: 6px;
+  min-height: 72px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.dns-empty {
+  padding: 18px;
+  background: var(--paper-soft);
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.dns-answer {
+  display: grid;
+  grid-template-columns: 52px 62px minmax(0, 1fr);
+  align-items: start;
+  gap: 10px;
+  padding: 12px 14px;
+  background: var(--paper-soft);
+}
+
+.answer-type {
+  font-size: 12px;
+  font-weight: 750;
+  line-height: 1.4;
+}
+
+.answer-ttl {
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.answer-data {
+  color: var(--ink);
+  font-family: "Cascadia Code", "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  font-size: 11px;
+  line-height: 1.55;
+  overflow-wrap: anywhere;
+}
+
+.dns-foot {
+  margin-top: 12px;
+}
+
+.dns .link-button {
+  color: var(--muted);
+}
+
+.dns .link-button:hover {
+  color: var(--ink);
+}
+
+@media (max-width: 900px) {
+  .net-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .identity-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .net-grid {
+    margin-top: 38px;
+  }
+
+  .identity,
+  .dns {
+    padding: 22px;
+  }
+
+  .identity-list {
+    grid-template-columns: 1fr;
+  }
+
+  .ip {
+    font-size: 26px;
+    line-height: 1.05;
+  }
+
+  .ip--long {
+    font-size: 23px;
+  }
+
+  .query-row {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .query-row .field--compact {
+    width: 100%;
+  }
+
+  .query-row .button {
+    width: 100%;
+  }
+
+  .dns-answer {
+    grid-template-columns: 44px minmax(0, 1fr);
+    gap: 4px 10px;
+  }
+
+  .answer-data {
+    grid-column: 1 / -1;
+    padding-top: 4px;
+    font-size: 11px;
+  }
+}

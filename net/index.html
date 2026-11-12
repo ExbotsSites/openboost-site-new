@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5efe4">
+  <meta name="description" content="See the public IP, provider and DNS records your connection uses. Live metadata and DNS-over-HTTPS, with no account.">
+  <title>Net — Axyy</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../utility.css">
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to network details</a>
+
+  <div class="shell">
+    <header class="topbar">
+      <a class="brand" href="../" aria-label="Axyy home">
+        <span class="brand-name">Axyy</span><span class="brand-slash">/</span><span class="brand-page">net</span>
+      </a>
+      <nav class="topnav" aria-label="Utilities">
+        <a href="../tools/">Tools</a>
+        <a href="./" aria-current="page">Net</a>
+        <a href="../speed/">Speed test</a>
+        <a href="../">Home</a>
+      </nav>
+    </header>
+
+    <main id="main">
+      <section class="hero" aria-labelledby="page-title">
+        <h1 id="page-title">What the<br>network sees.</h1>
+        <p class="hero-lede">Your public address, provider and location, plus a DNS lookup that runs in the browser. <strong>No account and no history.</strong></p>
+      </section>
+
+      <section class="net-grid" aria-label="Network information">
+        <article class="identity" aria-labelledby="identity-title">
+          <div class="card-head">
+            <h2 id="identity-title">This connection</h2>
+            <button class="button button--quiet button--small" id="identity-refresh" type="button">Refresh</button>
+          </div>
+
+          <p class="identity-status" id="identity-status" role="status" aria-live="polite">Reading your address…</p>
+
+          <div class="ip-line">
+            <p class="ip" id="identity-ip">—</p>
+            <button class="button button--small" id="identity-copy" type="button" disabled>Copy IP</button>
+          </div>
+
+          <dl class="identity-list">
+            <div>
+              <dt>Provider</dt>
+              <dd id="identity-org">—</dd>
+            </div>
+            <div>
+              <dt>ASN</dt>
+              <dd id="identity-asn">—</dd>
+            </div>
+            <div>
+              <dt>Location</dt>
+              <dd id="identity-location">—</dd>
+            </div>
+            <div>
+              <dt>Timezone</dt>
+              <dd id="identity-timezone">—</dd>
+            </div>
+          </dl>
+
+          <p class="card-note">IP data from <span id="identity-source">a public lookup</span>. Nothing is stored by this page.</p>
+        </article>
+
+        <article class="dns" aria-labelledby="dns-title">
+          <div class="card-head">
+            <h2 id="dns-title">DNS lookup</h2>
+            <span class="card-meta">Over HTTPS</span>
+          </div>
+
+          <form class="dns-form" id="dns-form">
+            <div class="field">
+              <label for="dns-name">Domain or host</label>
+              <input id="dns-name" name="dns-name" type="text" value="example.com" placeholder="example.com" autocomplete="off" spellcheck="false" required>
+            </div>
+            <div class="query-row">
+              <div class="field field--compact">
+                <label for="dns-type">Record type</label>
+                <select id="dns-type" name="dns-type">
+                  <option value="A">A</option>
+                  <option value="AAAA">AAAA</option>
+                  <option value="CNAME">CNAME</option>
+                  <option value="MX">MX</option>
+                  <option value="TXT">TXT</option>
+                  <option value="NS">NS</option>
+                </select>
+              </div>
+              <button class="button" id="dns-submit" type="submit">Look up</button>
+            </div>
+          </form>
+
+          <div class="examples" aria-label="Example lookups">
+            <span>Try</span>
+            <button class="link-button" type="button" data-domain="github.com">github.com</button>
+            <button class="link-button" type="button" data-domain="openai.com">openai.com</button>
+            <button class="link-button" type="button" data-domain="example.com" data-type="MX">example.com MX</button>
+          </div>
+
+          <p class="status" id="dns-status" role="status" aria-live="polite">Ready.</p>
+          <ol class="dns-results" id="dns-results" aria-label="DNS answers">
+            <li class="dns-empty">Enter a domain to see its records.</li>
+          </ol>
+          <div class="dns-foot">
+            <button class="link-button" id="dns-copy" type="button" disabled>Copy answers</button>
+          </div>
+
+          <p class="card-note">DNS queries go to Cloudflare’s public resolver, with Google DoH as a fallback. This page stores nothing.</p>
+        </article>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p class="footer-mark">Axyy</p>
+      <div class="footer-side">
+        <p>Live network details, read once and forgotten. No account, no analytics and no stored history.</p>
+        <nav class="footer-nav" aria-label="Elsewhere">
+          <a href="../">Home</a>
+          <a href="../tools/">Tools</a>
+          <a href="../speed/">Speed test</a>
+          <a href="https://github.com/ExbotsSites" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+        </nav>
+        <p>© 2026 Axyy</p>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
