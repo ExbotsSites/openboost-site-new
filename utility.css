@@ -169,14 +169,21 @@ a {
 }
 
 .footer {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 28px;
   margin-top: clamp(80px, 12vh, 140px);
   padding: clamp(28px, 4vw, 48px) 0;
   background: var(--dark);
   color: var(--dark-ink);
+}
+
+.footer-inner {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 28px;
+  width: 100%;
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 var(--pad);
 }
 
 .footer-mark {
@@ -408,7 +415,7 @@ a {
     max-width: 48ch;
   }
 
-  .footer {
+  .footer-inner {
     align-items: flex-start;
     flex-direction: column;
   }
